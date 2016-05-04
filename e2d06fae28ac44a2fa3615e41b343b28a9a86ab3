@@ -78,11 +78,11 @@ print('-'*60)
 
 
 #scan reserved ports
-for i in range(1, 65535):
+for a in range(1, 65535):
     s = socket(AF_INET, SOCK_STREAM)
-    result = s.connect_ex((targetIP, i))
+    result = s.connect_ex((targetIP, a))
     if(result == 0) :
-        port = str(i)
+        port = str(a)
         function = common_ports.get(port, "Unknown use")
-        print ('Open port found: {0} for {1}'.format(i, function))
+        print ('Open port found: {0} for {1}'.format(a, function))
     s.close()
