@@ -1,6 +1,42 @@
 from socket import * 
+from scapy.all import *
+import netaddr
 
+# IPrange to ping
+networkIP = "192.2.27.0/24"
 
+# makes a list of addresses 
+addresses = netaddr.IPNetwork(networkIP)
+liveCounter = 0
+
+# Send ICMP ping request
+for i in addresses:
+
+	if (i == addresses.network or i == addresses.broadcast):
+		continue
+
+	
+	response= sr1(IP(dst=str(i))/ICMP(),timeout=2,verbose=0)
+	
+
+	if (str(type(response)) == "<type 'NoneType'>"):	
+		print (str(i) + " is not responding.")
+	
+
+	elif (int(response.getlayer(ICMP).type)==3 and \
+	 int(response.getlayer(ICMP).code) \
+	 in [1,2,3,9,10,13]):
+	   
+	        print (str(i) + " is blocking ICMP.")
+	
+
+	else:
+		print (str(i) + " is responding.")
+		liveCounter += 1
+
+print ("Out of " + str(addresses.size) + " hosts, " + str(liveCounter) + " are online.")
+
+#Common usage of ports
 common_ports = {
  
 	'21': 'FTP',
@@ -39,7 +75,6 @@ targetIP = gethostbyname(target)
 print('-'*60)
 print ('Please wait while it scans ', targetIP)
 print('-'*60)
-
 
 
 #scan reserved ports
