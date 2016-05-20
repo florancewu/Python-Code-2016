@@ -1,0 +1,90 @@
+def mycount(lst,item):
+    count=0
+    for i in lst:
+        if i==item:
+            count+=1
+    return count
+
+
+
+#Question2
+
+def myindex(lst, item):
+    index=0
+    for i in lst:
+        if i==item:
+            return index
+        index += 1
+    return -1
+#Question3
+
+def all_indices(lst,item):
+    indice=[]
+    count=0
+    for i in lst:
+        if i==item:
+            indice.append(count)
+        count+=1
+    if len(indice)>0:
+        return indice
+    else:
+        return -1
+#Question 4
+def remove_below_avg(lst):
+    nums=len(lst)
+    count=0
+    new_list=[]
+    for i in lst:
+        count+=i
+    avg=count/nums
+    for i in lst:
+        if i>=avg:
+            new_list.append(i)
+    return new_list
+#Question 5
+
+def output_of_game():
+    import random
+    num = random.randint(0,3)
+    lst=['rock', 'paper', 'scissors']
+    return lst[num]
+
+
+def winorlose(you, opponent):
+    opponent = output_of_game()
+    if (you == opponent):
+        return 'It\'s a tie'
+    elif (you == "scissors" and opponent=='paper'):
+        return 'You win'
+    elif (you=='rock' and opponent=='scissors'):
+        return 'You win'
+    elif (you=='paper' and opponent=='rock'):
+        return 'You win'
+    else:
+        return 'You lose'
+
+
+def user_input():
+    you=input("Rock,paper,or scissors? (Say 'done' when finished.): ")
+    if (you!='rock' or you!='paper' or you!='scissors' or you!='Done'):
+        you=input("Please enter 'rock,paper, or scissors': ")
+    opponent = output_of_game()
+    winorlose(you, opponent)
+
+def game():
+    user_input()
+    while you!='Done':
+        user_input()
+                  
+    
+def main():
+    print(mycount([1,2,34,1,2,'H','I','H'],'H'))
+    print(myindex([123, 4, 'H', 'I', 'H', 123],123))
+    print(all_indices([123, 4, 'H', 'I', 'H', 123],123))
+    print(remove_below_avg([1,2,3,4,5,6]))
+    print(game)
+main()
+    
+            
+
+
