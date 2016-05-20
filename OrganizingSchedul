@@ -1,0 +1,39 @@
+def storing_information():
+    import csv
+    file = csv.reader(open('train stop data-Mac.csv'),delimiter=',')
+    train={}
+    count=0
+    for i in file:
+        line=i[0]
+        line=line[0]
+        value=[]
+        value.append(i[2])
+        if line not in train:
+            train[line]=value
+        elif line in train:
+            for c in train[line]:
+                if c==i[2]:
+                    count+=1
+            if count==0:
+                train[line].append(i[2])
+            else:
+                count=0
+    file.close()
+    return train
+
+storing_information()
+            
+
+
+
+def main():
+    storing_information()
+    line=input("Please enter a train line, or 'done' to stop:")
+    while (line!='done'):
+        a=train[line]
+        a=a.strip('[')
+        a=a.strip(']')
+        print(a)
+        line=input("Please enter a train line, or 'done' to stop:")
+        
+
