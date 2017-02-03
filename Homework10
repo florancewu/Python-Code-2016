@@ -1,0 +1,129 @@
+'''
+Florance Wu
+Homework10
+
+'''
+#Question 1 Part A
+'''
+This takes elements randomly and inserts it into
+a new list.
+'''
+def create_permutation(lst):
+    import random
+    new_lst=[]
+    for i in range(0,len(lst)):
+        index=random.randint(0,len(lst)-1)
+        new_lst.append(lst[index])
+        lst.pop(index)
+    return new_lst
+#Question 1 Part B
+'''
+It loops through every number from 1 to the user input and adds
+it into an empty list.
+'''
+def main1():
+    n=int(input("Please enter a positive integer"))
+    lst=[]
+    for i in range(1,n+1):
+        lst.append(i)
+    print(create_permutation(lst))
+main1()
+
+#Question 2
+'''
+Each index of both lists are changed into integers and added together.
+Then it gets appended and the list is returned.
+'''
+
+def add_list(lst1, lst2):
+    sum_lst=[]
+    for i in range(len(lst1)):
+        sum_lst.append(int(lst1[i])+int(lst2[i]))
+    return sum_lst
+'''
+This function keeps asking for numbers until told done and it appends it into a list.
+Afterwards, it calls on the previous function to add the numbers together.
+'''
+def main2():
+    lst1=[]
+    lst2=[]
+    num= input("Please enter a number. If done, say 'done.'")
+    while (num!='done'):
+        lst1.append(int(num))
+        num=input("Please enter another number")
+    num=input("Please enter a number for the second list. If done, say 'done'")
+    while (num!='done'):
+        lst2.append(int(num))
+        num=input("Please enter another number till done")
+    
+    if(len(lst1)!=len(lst2)):
+        print("The lengths are not the same")
+    else:
+        print(add_list(lst1,lst2))
+main2()
+
+#Question 3
+'''
+It takes the length of the list and loops through it with a for loop.
+Within a for loop, it adds into the new list from 0 to whatever index i is in
+the original list.
+'''
+def create_prefix_lists(lst):
+    new_lst=[]
+    for i in range(0,len(lst)+1):
+        new_lst.append(lst[0:i])
+    return new_lst
+
+#Question 4
+'''
+It asks for user to input how many items they have and enter the name
+and price of it in a certain format with a colon in between. It uses
+the split function to split the name and price. It gets appended into
+a list.
+'''
+def read_menu():
+    n=int(input("Please enter a number"))
+    menu_lst=[]
+    for i in range(0,n):
+        item=input("Enter item in the form 'name:price':")
+        name_price= item.split(":")
+        menu_lst.append((name_price[0],name_price[1]))
+    return menu_lst
+
+'''
+It prompts for user input on their order and it appends each order into the list
+until they are done.
+'''
+def read_customer_order():
+    order=input("Please enter your order")
+    order_lst=[]
+    while order!='done':
+        order_lst.append(order)
+        order=input("Please enter another order:")
+    return order_lst
+'''
+It loops through the menu and the order list to see if something on the menu is ordered.
+Then it takes the price of the item by find the first index of the menu list
+and it adds onto a count.
+'''
+def compute_price(menu_list, order_list):
+    total_price= 0
+    for i in range(0,len(menu_list)):
+        for c in range(0, len(order_list)):
+            sub_lst=menu_list[i]
+            if (order_list[c]==sub_lst[0]):
+                total_price+=float(sub_lst[1])
+    return total_price
+                
+'''
+It calls two functions within a function and the total price is multiplied by
+the percentages to get the final price.
+'''
+def main3():
+    total=compute_price(read_menu(), read_customer_order())*1.085
+    total=total*1.15
+    print(round(total,2))
+main3()
+    
+       
+
