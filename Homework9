@@ -1,0 +1,103 @@
+'''
+Florance Wu
+Homework 9
+'''
+
+#Homework 9 Question 1
+'''
+This compares each element in the list to the very
+first element to see if it is greater. If it is
+greater, it replaces the value of what maximum is
+'''
+def max_abs_val(lst):
+    maximum = lst[0]
+    for i in lst:
+        if ( abs(i) > maximum ):
+            maximum = abs(i)
+    return maximum
+
+#Homework9 Question 2
+'''
+I used a count and looped through the list to find
+the indexes. When an element matches the value, I add
+the the number that the count is at to a new list.
+'''
+def find_all(lst, val):
+    newlst=[]
+    count=-1
+    for i in lst:
+        count+=1
+        if i==val:
+            newlst.append(count)           
+    return newlst
+#Homework 9 Question 3 Part A
+'''
+I kept popping out the last element in the list and appending it onto a new one
+'''
+def reverse1(lst):
+    rev_lst=[]
+    for i in range(0,len(lst)):
+        rev_lst.append(lst.pop())
+    return rev_lst
+#Homework 9 Question 3 Part B
+'''
+I changed the order of the elements within the list by popping the last
+element out and inserting into the beginning.
+'''
+def reverse2(lst):
+    count=0
+    for i in range(0,len(lst)):
+        lst.insert(count, lst.pop())
+        count+=1
+    return lst
+
+#Homework 9 Question 4 Part A
+'''
+This code loops through each letter of the string. It uses a count to find the indices and once the letter
+changes, it resets the count and list.
+'''
+def encoder(string):
+    lst=[]
+    returned = []
+    a=string[0]
+    count = 0
+    for i in string:
+        if ( i == a ):
+            count += 1
+        else:
+            lst.append(a)
+            lst.append(count)
+            returned.append(lst)
+            count = 1
+            a = i
+            lst = []
+    lst.append(a)
+    lst.append(count)
+    returned.append(lst)
+    return returned
+#Homework 9 Question 4 Part B
+'''
+It loops through the list and it takes the index 0 of each list and multiplies it
+by index 1 and adds onto a string.
+'''
+
+def decoder(lst):
+    string=''
+    letter_lst=''
+    for i in lst:
+        letter_lst+=i[0]
+        string+=letter_lst*int(i[1])
+        letter_lst=''
+    return string       
+            
+def main():
+    max_abs_val([1,-15, 10, -20,-30,2,5])
+    find_all([1,2,10,9,8,2,3,2], 2)
+    reverse1([1,15,9,8,10,7])
+    reverse2([1,15,9,8,10,7])
+    encoder('aaaaaaabbccd')
+    decoder([['a','3'],['b','2'],['c','5']])
+
+        
+
+main()
